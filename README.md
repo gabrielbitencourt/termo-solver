@@ -1,5 +1,5 @@
 # term.ooo solver
-Javascript algorithm(s) for solving term.ooo games (portuguese version of Wordle). Heavily based on Jon Gjengset rust implementation Roget.
+Javascript algorithm(s) for solving term.ooo games (portuguese version of Wordle). Heavily based on Jon Gjengset's rust implementation [Roget](https://github.com/jonhoo/roget).
 
 Test
 ```
