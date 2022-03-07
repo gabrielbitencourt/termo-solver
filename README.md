@@ -12,6 +12,6 @@ npm run dev
 
 ## Roadmap
 - CLI Arguments
-- Better algorithms
+- Better algorithms (and bechmark them)
 - Find better frequencies list for dictionary words
 - Test with other wordle rules (bigger words, simultaneous games, etc)
