@@ -5,14 +5,14 @@ import { IGuesser } from "../models/guesser";
 import { dictionary } from "../static/dictionary";
 import { frequencies, total } from "../static/frequencies";
 
-type Candidate = { word: string; frequency: number; };
+type Candidate = { word: string; count: number; };
 
 export class Naive implements IGuesser
 {
     reamaining: Candidate[];
     constructor()
     {
-        this.reamaining = dictionary.map(word => ({ word, frequency: (frequencies[word] ?? 0) / total }))
+        this.reamaining = dictionary.map(word => ({ word, count: frequencies[word] ?? 0 }))
     }
 
     guess(history: IGuess[]): string
@@ -25,7 +25,7 @@ export class Naive implements IGuesser
 
         let best: Candidate | undefined;
         for (const remaining of this.reamaining) {
-            if (!best || remaining.frequency > best.frequency)
+            if (!best || remaining.count > best.count)
             {
                 best = remaining;
                 continue;
@@ -36,7 +36,7 @@ export class Naive implements IGuesser
 
     reset()
     {
-        this.reamaining = dictionary.map(word => ({ word, frequency: (frequencies[word] ?? 0) / total }))
+        this.reamaining = dictionary.map(word => ({ word, count: frequencies[word] ?? 0 }))
     }
 
     static allows(last: { word: string, correctness: Correctness[] }, candidate: string): boolean
