@@ -1,4 +1,5 @@
 dist
+*.txt
 
 ### macOS ###
 # General
