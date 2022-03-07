@@ -1,4 +1,5 @@
 import { Game } from "../game";
+import { Correctness } from "../models/correctness";
 import { IGuess } from "../models/guess";
 import { IGuesser } from "../models/guesser";
 import { dictionary } from "../static/dictionary";
@@ -19,12 +20,8 @@ export class Naive implements IGuesser
         if (history.length)
         {
             const last = history[history.length - 1];
-            this.reamaining = this.reamaining.filter(candidate => Game.check(last.word, candidate.word).toString() === last.correctness.toString())
+            this.reamaining = this.reamaining.filter(candidate => Naive.allows(last, candidate.word))
         }
-        // else
-        // {
-        //     return ""
-        // }
 
         let best: Candidate | undefined;
         for (const remaining of this.reamaining) {
@@ -40,5 +37,10 @@ export class Naive implements IGuesser
     reset()
     {
         this.reamaining = dictionary.map(word => ({ word, frequency: (frequencies[word] ?? 0) / total }))
+    }
+
+    static allows(last: { word: string, correctness: Correctness[] }, candidate: string): boolean
+    {
+        return Game.check(last.word, candidate).toString() === last.correctness.toString()
     }
 }
