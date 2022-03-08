@@ -30,4 +30,29 @@ export class CorrectnessHelper {
         }
         return result;
     }
+    static allPatterns()
+    {
+        return this.cartesianProduct([
+            [Correctness.CORRECT, Correctness.MISPLACED, Correctness.WRONG],
+            [Correctness.CORRECT, Correctness.MISPLACED, Correctness.WRONG],
+            [Correctness.CORRECT, Correctness.MISPLACED, Correctness.WRONG],
+            [Correctness.CORRECT, Correctness.MISPLACED, Correctness.WRONG],
+            [Correctness.CORRECT, Correctness.MISPLACED, Correctness.WRONG],
+        ]);
+    }
+    private static cartesianProduct<T>(a: T[][]): T[][] { // a = array of array
+        var i, j, l, m, a1, o = [];
+        if (!a || a.length == 0) return a;
+      
+        a1 = a.splice(0, 1)[0]; // the first array of a
+        a = CorrectnessHelper.cartesianProduct(a);
+        for (i = 0, l = a1.length; i < l; i++) {
+          if (a && a.length)
+            for (j = 0, m = a.length; j < m; j++)
+              o.push([a1[i]].concat(a[j]));
+          else
+            o.push([a1[i]]);
+        }
+        return o;
+      }
 }
